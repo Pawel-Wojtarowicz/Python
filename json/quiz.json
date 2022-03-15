@@ -1,0 +1,38 @@
+[
+    {
+        "kategoria":"IT",
+        "pytanie":"W ktrórym roku pojawił sie Python?",
+        "a":1991,
+        "b":1986,
+        "c":1995,
+        "d":2000,
+        "prawidlowa_odpowiedz":"a"
+    },
+    {
+        "kategoria":"Geografia",
+        "pytanie":"Która planetą od słońca jest ziemia?",
+        "a":1,
+        "b":2,
+        "c":3,
+        "d":4,
+        "prawidlowa_odpowiedz":"c"  
+    },
+    {
+        "kategoria":"Film",
+        "pytanie":"Kto jako pierwszy wcielił sie w role James'a Bonda?",
+        "a":"Rogger Moore",
+        "b":"Sean Connery",
+        "c":"Daniel Craig",
+        "d":"Pierse Brosnan",
+        "prawidlowa_odpowiedz":"b"
+    },
+    {
+        "kategoria":"Film",
+        "pytanie":"Kiedy Była premiera filmu Forrest Gump?",
+        "a":"1992",
+        "b":"1993",
+        "c":"1994",
+        "d":"1995",
+        "prawidlowa_odpowiedz":"c"
+    }
+]
