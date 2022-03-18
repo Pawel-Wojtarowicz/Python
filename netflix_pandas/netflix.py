@@ -1,8 +1,19 @@
 import pandas as pd
+import sys
 
-def prepare_file():
-    df = pd.read_csv(r'd:\python\git\netflix_pandas\ViewingActivity.csv')
-    df = df.drop(['Attributes', 'Device Type', 'Bookmark', 'Latest Bookmark', 'Supplemental Video Type', 'Country'], axis=1)
+
+def load_file():
+    try:
+        df = pd.read_csv(r'd:\python\git\netflix_pandas\ViewingActivity.csv')
+        return df
+    except Exception as e:
+        print("No such file or directory")
+        sys.exit(1)
+        
+
+def prepare_file(file):
+
+    df = file.drop(['Attributes', 'Device Type', 'Bookmark', 'Latest Bookmark', 'Supplemental Video Type', 'Country'], axis=1)
     df['Start Time'] = pd.to_datetime(df['Start Time'], utc=True)
     df = df.set_index('Start Time')
     df.index = df.index.tz_convert('Europe/Warsaw')
@@ -13,7 +24,7 @@ def prepare_file():
 
 if __name__ == '__main__':
 
-    df = prepare_file()
+    df = prepare_file(load_file())
 
     while True:
         name = input("Enter the name of TV-Series: ")
