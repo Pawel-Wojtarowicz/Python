@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup
 from requests import get
 import codecs
 import random
+import tweepy
+import json
 
 URL = 'https://www.telemagazyn.pl/film/kiler-539975/'
 
@@ -17,7 +19,7 @@ def random_quotes():
         return quote
 
 
-def is_it_on_tv_tonight(beautifulSoup):
+def is_it_on_tv_tonight(beautifulSoup, quotes):
     emissionDays = []
     emissionHours = []
     emissionChannels = []
@@ -36,15 +38,40 @@ def is_it_on_tv_tonight(beautifulSoup):
         for result in results:
             emissionChannels.append(result.get_text())
 
-    if emissionDays[0].startswith("Dzisiaj"):
-        if (emissionDays[0] == emissionDays[2]):
-            return emissionDays[0] + ' o godz:' + emissionHours[0] + ' na kanale ' + emissionChannels[0] + ' oraz o' + emissionHours[1] + ' na kanale ' + emissionChannels[1]
-        elif (emissionDays[0] == "Dzisiaj"):
-            return emissionDays[0] + ' o godzinie' + emissionHours[0] + ' na kanale ' + emissionChannels[0]
+
+    if len(emissionDays) != 0:
+        if emissionDays[0].startswith("Dzisiaj"):
+            if (emissionDays[0] == emissionDays[2]):
+                return emissionDays[0] + ' o godz:' + emissionHours[0] + ' na kanale ' + emissionChannels[0] + ' oraz o' + emissionHours[1] + ' na kanale ' + emissionChannels[1]
+            elif (emissionDays[0] == "Dzisiaj"):
+                return 'Tak, o godzinie' + emissionHours[0] + ', na kanale ' + emissionChannels[0]
     else:
-        return "Dzisiaj nie leci"
+        return 'Dzisiaj nie leci \n\n' + '"' + quotes + '"'
 
-emission = is_it_on_tv_tonight(bs)
-quote = random_quotes()
 
-print(emission +"\n"+ "- "+quote)
+def authentication(creds):
+
+    credentials = read_creds(creds)
+    api_key, api_secrets = credentials['api_key'], credentials['api_secrets']
+    token, token_secrets = credentials['access_token'], credentials['access_secret']
+
+    auth = tweepy.OAuthHandler(api_key, api_secrets)
+    auth.set_access_token(token, token_secrets)
+
+    api = tweepy.API(auth)
+
+    status = is_it_on_tv_tonight(bs, random_quotes())
+    print(status)
+    api.update_status(status=status)
+
+
+def read_creds(filename):
+
+    with open(filename) as f:
+        credentials = json.load(f)
+    return credentials
+
+
+if __name__ == '__main__':
+    credentials = 'credentials.json'
+    api = authentication(credentials)
