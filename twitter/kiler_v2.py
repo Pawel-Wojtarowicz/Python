@@ -62,8 +62,8 @@ def authentication(creds):
     api = tweepy.API(auth)
 
     status = is_it_on_tv_tonight(bs, random_quote())
-    print(status)
-    #api.update_status(status=status)
+    # print(status)
+    api.update_status(status=status)
 
 
 def read_creds(filename):
