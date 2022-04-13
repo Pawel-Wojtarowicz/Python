@@ -11,7 +11,7 @@ page = get(URL)
 bs = BeautifulSoup(page.content, 'html.parser')
 
 
-def random_quotes():
+def random_quote():
     with codecs.open(r"D:\Python\Git\twitter\quotes.txt", "r", "utf-8") as file:
         lines = file.read().splitlines()
         random_quote = random.sample(lines, 1)
@@ -19,7 +19,7 @@ def random_quotes():
         return quote
 
 
-def is_it_on_tv_tonight(beautifulSoup, quotes):
+def is_it_on_tv_tonight(beautifulSoup, quote):
     emissionDays = []
     emissionHours = []
     emissionChannels = []
@@ -38,15 +38,16 @@ def is_it_on_tv_tonight(beautifulSoup, quotes):
         for result in results:
             emissionChannels.append(result.get_text())
 
-
     if len(emissionDays) != 0:
         if emissionDays[0].startswith("Dzisiaj"):
-            if (emissionDays[0] == emissionDays[2]):
+            if (emissionDays[0] == emissionDays[1]):
                 return emissionDays[0] + ' o godz:' + emissionHours[0] + ' na kanale ' + emissionChannels[0] + ' oraz o' + emissionHours[1] + ' na kanale ' + emissionChannels[1]
             elif (emissionDays[0] == "Dzisiaj"):
                 return 'Tak, o godzinie' + emissionHours[0] + ', na kanale ' + emissionChannels[0]
+        else:
+            return 'Dzisiaj nie leci \n\n' + '"' + quote + '"'
     else:
-        return 'Dzisiaj nie leci \n\n' + '"' + quotes + '"'
+        return 'Dzisiaj nie leci \n\n' + '"' + quote + '"'
 
 
 def authentication(creds):
@@ -60,9 +61,9 @@ def authentication(creds):
 
     api = tweepy.API(auth)
 
-    status = is_it_on_tv_tonight(bs, random_quotes())
+    status = is_it_on_tv_tonight(bs, random_quote())
     print(status)
-    api.update_status(status=status)
+    #api.update_status(status=status)
 
 
 def read_creds(filename):
