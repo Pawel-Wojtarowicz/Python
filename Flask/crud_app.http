@@ -6,8 +6,8 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "username" : "Tomek",
-    "city" : "Opole"
+    "username" : "lukasz",
+    "city" : "wroclaw"
 }
 
 ################################
@@ -24,3 +24,21 @@ Content-Type: application/json
 
 DELETE  http://localhost:5000/users/1
 Content-Type: application/json
+
+
+################################
+
+
+PATCH  http://localhost:5000/users/4
+Content-Type: application/json
+
+{
+    "city" : "Wroclaw"
+}
+
+
+################################
+
+DELETE http://localhost:5000/users/all
+Content-Type: application/json
+

@@ -100,4 +100,42 @@ def delete_user(user_id):
     return jsonify()
 
 
+@app.route('/users/<user_id>', methods=['PATCH'])
+def patch_data(user_id):
+    request_data = request.get_json()
+    request_data['user_id'] = user_id
+
+    try:
+        connection = get_connection_to_db()
+        cursor = connection.cursor()
+
+        query = 'UPDATE users SET city=%(city)s WHERE id=%(user_id)s'
+        cursor.execute(query, request_data)
+        connection.commit()
+    except mysql.connector.Error as err:
+        return jsonify(status=err.msg), 400
+    finally:
+        connection.close()
+
+    return request_data
+
+
+@app.route('/users/all', methods=['DELETE'])
+def delete_all():
+
+    try:
+        connection = get_connection_to_db()
+        cursor = connection.cursor()
+
+        query = 'TRUNCATE table users'
+        cursor.execute(query)
+        connection.commit()
+    except mysql.connector.Error as err:
+        return jsonify(status=err.msg), 400
+    finally:
+        connection.close()
+
+    return 'DB została wyczyszczona'
+
+
 app.run()
