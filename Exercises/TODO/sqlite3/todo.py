@@ -10,7 +10,7 @@ parser.add_argument('--toogle', help='Change of task status')
 args = parser.parse_args()
 
 
-connection = sqlite3.connect(r'D:\Python\Git\Exercises\TODO\todo.db')
+connection = sqlite3.connect(r'D:\Python\Git\Exercises\TODO\Sqlite3\todo.db')
 cursor = connection.cursor()
 
 
