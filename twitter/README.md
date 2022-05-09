@@ -1,3 +1,3 @@
 ### Kiler Twitter notification 
 
-- The application sends one tweet per day with an information about whether a particular movie will be in that day on TV . Application connects to Twitter via API. The application uses web scraping.
+- The app sends one tweet per day indicating whether a particular movie will be on TV that day. The application connects to Twitter using an API interface. The application uses web scraping. 
