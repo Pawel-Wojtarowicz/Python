@@ -1,6 +1,6 @@
 # https://app.codility.com/programmers/lessons/4-counting_elements/frog_river_one/
 
-A = [1, 3, 4, 5, 6, 8, 2, 2, 2, 7, 2, 3]
+A = [1, 3, 4, 5, 6, 8, 2, 2, 2, 7, 2]
 
 
 def solution(X, A):
