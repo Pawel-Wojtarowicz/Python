@@ -27,7 +27,7 @@ def sets():
             for url in values:
                 alternativesDict[url['moc_img_url']] = url['moc_url']
 
-    flash(f"Alternatywne zestawy dla: {provided_lego_set_name['name']}")
+    flash(f"Alternatywne zestawy dla: {provided_lego_set} - {provided_lego_set_name['name']}")
     return render_template('index.html', alternativesDict=alternativesDict)
 
 
