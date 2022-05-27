@@ -31,5 +31,3 @@ def sets():
     return render_template('index.html', alternativesDict=alternativesDict)
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
